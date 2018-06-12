@@ -33,7 +33,8 @@ public class CapabilityCharacterStats {
         final NBTTagCompound tags = new NBTTagCompound();
         tags.setTag("stats", stats);
         tags.setTag("skills", skills);
-        tags.setInteger("proficiency", instance.proficiency());
+        tags.setInteger("level", instance.level());
+        tags.setInteger("exp", instance.exp());
 
         return tags;
       }
@@ -55,7 +56,8 @@ public class CapabilityCharacterStats {
           instance.skill(skill).setProficiency(skills.getInteger(skill.name() + "Proficiency"));
         }
 
-        instance.setProficiency(((NBTTagCompound)base).getInteger("proficiency"));
+        instance.setLevel(((NBTTagCompound)base).getInteger("level"));
+        instance.setExp(((NBTTagCompound)base).getInteger("exp"));
       }
     }, CharacterStats::new);
   }
