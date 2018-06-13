@@ -8,7 +8,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
+import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.stats.CapabilityCharacterStats;
 
 @Mod(modid = Mcnd.MODID, name = Mcnd.NAME, version = Mcnd.VERSION)
@@ -30,6 +32,8 @@ public class Mcnd {
     logger = event.getModLog();
 
     CapabilityCharacterStats.register();
+
+    NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
   }
 
   @EventHandler

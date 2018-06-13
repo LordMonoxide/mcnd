@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.commands;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
@@ -6,6 +6,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import us.corielicio.mcnd.guis.GuiCharacterSheet;
 
 public class CommandShowCharacterSheet extends CommandBase {
   @Override
@@ -15,8 +16,7 @@ public class CommandShowCharacterSheet extends CommandBase {
 
   @Override
   public String getUsage(final ICommandSender sender) {
-    //TODO
-    return "translation.goes.here";
+    return "command.character_sheet";
   }
 
   @Override

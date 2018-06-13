@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.guis;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,10 +8,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import us.corielicio.mcnd.Mcnd;
+import us.corielicio.mcnd.stats.CapabilityCharacterStats;
+import us.corielicio.mcnd.stats.CharacterStats;
+import us.corielicio.mcnd.stats.Stats;
 
 @SideOnly(Side.CLIENT)
 public class GuiCharacterSheet extends GuiScreen {
-  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Mcnd.MODID, "textures/gui/character_sheet.png");
+  private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Mcnd.MODID, "textures/guis/character_sheet.png");
   private static final int BG_WIDTH = 176;
   private static final int BG_HEIGHT = 166;
 
