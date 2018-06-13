@@ -1,2 +1,6 @@
 stats=Stats
 stats.display=%d (%d) %s
+
+gui_dynamic_item.name=Custom Item Builder
+gui_dynamic_item.item_name=Name
+gui_dynamic_item.item_sprite=Sprite (place an item here to copy it)

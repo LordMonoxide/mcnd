@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 import us.corielicio.mcnd.guis.GuiHandler;
+import us.corielicio.mcnd.packets.McndNet;
 import us.corielicio.mcnd.stats.CapabilityCharacterStats;
 
 @Mod(modid = Mcnd.MODID, name = Mcnd.NAME, version = Mcnd.VERSION)
@@ -34,11 +35,15 @@ public class Mcnd {
     CapabilityCharacterStats.register();
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
+
+    proxy.preInit(event);
   }
 
   @EventHandler
   public void init(final FMLInitializationEvent event) {
     logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+    McndNet.register();
   }
 
   @EventHandler

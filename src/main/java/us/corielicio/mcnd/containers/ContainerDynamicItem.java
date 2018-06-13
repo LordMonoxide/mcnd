@@ -7,6 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
+import org.apache.commons.lang3.StringUtils;
 import us.corielicio.mcnd.containers.slots.SlotOutput;
 import us.corielicio.mcnd.items.McndItems;
 
@@ -16,7 +18,7 @@ public class ContainerDynamicItem extends Container {
   private final IItemHandler inventory;
 
   public ContainerDynamicItem(final InventoryPlayer playerInventory) {
-    this.inventory = new ItemStackHandler(1) {
+    this.inventory = new ItemStackHandler(2) {
       @Override
       @Nonnull
       public ItemStack extractItem(final int slot, final int amount, final boolean simulate) {
@@ -31,6 +33,7 @@ public class ContainerDynamicItem extends Container {
     };
 
     this.addSlotToContainer(new SlotOutput(this.inventory, 0, 152, 62));
+    this.addSlotToContainer(new SlotItemHandler(this.inventory, 1, 29, 36));
 
     for(int y = 0; y < 3; ++y) {
       for(int x = 0; x < 9; ++x) {
@@ -52,5 +55,15 @@ public class ContainerDynamicItem extends Container {
 
   public ItemStack getOutput() {
     return this.inventory.getStackInSlot(0);
+  }
+
+  public void updateItemName(final String name) {
+    final ItemStack itemstack = this.getSlot(0).getStack();
+
+    if(StringUtils.isBlank(name)) {
+      itemstack.clearCustomName();
+    } else {
+      itemstack.setStackDisplayName(name);
+    }
   }
 }

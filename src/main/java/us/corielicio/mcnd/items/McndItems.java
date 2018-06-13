@@ -14,7 +14,7 @@ import java.util.List;
 public class McndItems {
   private McndItems() { }
 
-  private static final List<Item> ITEMS = new ArrayList<>();
+  public static final List<Item> ITEMS = new ArrayList<>();
 
   public static final DynamicItem DYNAMIC_ITEM = register(new DynamicItem());
 

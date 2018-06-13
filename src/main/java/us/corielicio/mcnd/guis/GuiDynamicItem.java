@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import us.corielicio.mcnd.Mcnd;
 import us.corielicio.mcnd.containers.ContainerDynamicItem;
+import us.corielicio.mcnd.packets.PacketDynamicItemRename;
 
 import java.io.IOException;
 
@@ -31,19 +32,19 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
   public void initGui() {
     super.initGui();
     Keyboard.enableRepeatEvents(true);
-    this.txtName = new GuiTextField(0, this.fontRenderer, this.guiLeft + 8, this.guiTop + this.fontRenderer.FONT_HEIGHT + 8, 103, 12);
+    this.txtName = new GuiTextField(0, this.fontRenderer, this.guiLeft + 28, this.guiTop + this.fontRenderer.FONT_HEIGHT + 10, 103, 12);
     this.txtName.setTextColor(0xFFFFFFFF);
     this.txtName.setDisabledTextColour(0xFFFFFFFF);
     this.txtName.setMaxStringLength(35);
-//    this.container.removeListener(this);
-//    this.container.addListener(this);
+    this.container.removeListener(this);
+    this.container.addListener(this);
   }
 
   @Override
   public void onGuiClosed() {
     super.onGuiClosed();
     Keyboard.enableRepeatEvents(false);
-//    this.container.removeListener(this);
+    this.container.removeListener(this);
   }
 
   @Override
@@ -57,6 +58,18 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     this.txtName.drawTextBox();
 
     this.renderHoveredToolTip(mouseX, mouseY);
+
+    if(mouseX >= this.guiLeft + 8 && mouseX <= this.guiLeft + 24) {
+      if(mouseY >= this.guiTop + 16 && mouseY <= this.guiTop + 32) {
+        this.renderToolTip(I18n.format("gui_dynamic_item.item_name"), mouseX, mouseY);
+      }
+    }
+
+    if(mouseX >= this.guiLeft + 8 && mouseX <= this.guiLeft + 24) {
+      if(mouseY >= this.guiTop + 36 && mouseY <= this.guiTop + 52) {
+        this.renderToolTip(I18n.format("gui_dynamic_item.item_sprite"), mouseX, mouseY);
+      }
+    }
   }
 
   @Override
@@ -74,6 +87,10 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
   }
 
+  private void renderToolTip(final String text, final int x, final int y) {
+    this.drawHoveringText(text, x, y);
+  }
+
   @Override
   protected void keyTyped(final char typedChar, final int keyCode) throws IOException {
     if(this.txtName.textboxKeyTyped(typedChar, keyCode)) {
@@ -87,8 +104,7 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     final String s = this.txtName.getText();
 
     this.container.getOutput().setStackDisplayName(s);
-    this.container.detectAndSendChanges();
-    //TODO this.mc.player.connection.sendPacket(new CPacketCustomPayload("MC|ItemName", new PacketBuffer(Unpooled.buffer()).writeString(s)));
+    PacketDynamicItemRename.send(s);
   }
 
   @Override
@@ -99,15 +115,13 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
 
   @Override
   public void sendAllContents(final Container containerToSend, final NonNullList<ItemStack> itemsList) {
-    System.out.println("sendAllContents");
     this.sendSlotContents(containerToSend, 0, containerToSend.getSlot(0).getStack());
   }
 
   @Override
   public void sendSlotContents(final Container containerToSend, final int slotInd, final ItemStack stack) {
-    System.out.println("sendSlotContents");
     if(slotInd == 0) {
-      this.txtName.setText(stack.isEmpty() ? "" : stack.getDisplayName());
+      this.txtName.setText(stack.hasDisplayName() ? "" : stack.getDisplayName());
       this.txtName.setEnabled(!stack.isEmpty());
 
       if(!stack.isEmpty()) {
