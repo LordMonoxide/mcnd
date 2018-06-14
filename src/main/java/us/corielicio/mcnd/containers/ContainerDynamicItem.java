@@ -5,6 +5,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -30,10 +32,26 @@ public class ContainerDynamicItem extends Container {
 
         return stack;
       }
+
+      @Override
+      protected void onContentsChanged(final int slot) {
+        if(slot == 1) {
+          final ItemStack stack = this.getStackInSlot(0);
+
+          if(!stack.isEmpty()) {
+            final ResourceLocation location = this.getStackInSlot(1).getItem().getRegistryName();
+            final NBTTagCompound sprite = new NBTTagCompound();
+            sprite.setString("Domain", location.getResourceDomain());
+            sprite.setString("Path", location.getResourcePath());
+
+            stack.getOrCreateSubCompound("display").setTag("Sprite", sprite);
+          }
+        }
+      }
     };
 
     this.addSlotToContainer(new SlotOutput(this.inventory, 0, 152, 62));
-    this.addSlotToContainer(new SlotItemHandler(this.inventory, 1, 29, 36));
+    this.addSlotToContainer(new SlotItemHandler(this.inventory, 1, 29, 56));
 
     for(int y = 0; y < 3; ++y) {
       for(int x = 0; x < 9; ++x) {

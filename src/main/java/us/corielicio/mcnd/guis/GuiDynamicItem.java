@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
@@ -13,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import us.corielicio.mcnd.Mcnd;
 import us.corielicio.mcnd.containers.ContainerDynamicItem;
+import us.corielicio.mcnd.guis.controls.Icon;
 import us.corielicio.mcnd.packets.PacketDynamicItemRename;
 
 import java.io.IOException;
@@ -21,6 +23,9 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
   private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Mcnd.MODID, "textures/gui/dynamic_item.png");
 
   private final ContainerDynamicItem container;
+  private Icon iconName;
+  private Icon iconDesc;
+  private Icon iconSprite;
   private GuiTextField txtName;
 
   public GuiDynamicItem(final ContainerDynamicItem container) {
@@ -38,6 +43,10 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     this.txtName.setMaxStringLength(35);
     this.container.removeListener(this);
     this.container.addListener(this);
+
+    this.iconName = new Icon(this, 8, 16, new ItemStack(Items.NAME_TAG), I18n.format("gui_dynamic_item.item_name"));
+    this.iconDesc = new Icon(this, 8, 36, new ItemStack(Items.BOOK), I18n.format("gui_dynamic_item.item_desc"));
+    this.iconSprite = new Icon(this, 8, 56, new ItemStack(Items.TOTEM_OF_UNDYING), I18n.format("gui_dynamic_item.item_sprite"));
   }
 
   @Override
@@ -58,18 +67,9 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     this.txtName.drawTextBox();
 
     this.renderHoveredToolTip(mouseX, mouseY);
-
-    if(mouseX >= this.guiLeft + 8 && mouseX <= this.guiLeft + 24) {
-      if(mouseY >= this.guiTop + 16 && mouseY <= this.guiTop + 32) {
-        this.renderToolTip(I18n.format("gui_dynamic_item.item_name"), mouseX, mouseY);
-      }
-    }
-
-    if(mouseX >= this.guiLeft + 8 && mouseX <= this.guiLeft + 24) {
-      if(mouseY >= this.guiTop + 36 && mouseY <= this.guiTop + 52) {
-        this.renderToolTip(I18n.format("gui_dynamic_item.item_sprite"), mouseX, mouseY);
-      }
-    }
+    this.iconName.drawTooltip(mouseX, mouseY);
+    this.iconDesc.drawTooltip(mouseX, mouseY);
+    this.iconSprite.drawTooltip(mouseX, mouseY);
   }
 
   @Override
@@ -83,6 +83,10 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
 
   @Override
   protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
+    this.iconName.draw();
+    this.iconDesc.draw();
+    this.iconSprite.draw();
+
     final String name = I18n.format("gui_dynamic_item.name");
     this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
   }
