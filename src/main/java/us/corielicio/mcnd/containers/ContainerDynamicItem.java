@@ -71,17 +71,38 @@ public class ContainerDynamicItem extends Container {
     return true;
   }
 
-  public ItemStack getOutput() {
-    return this.inventory.getStackInSlot(0);
+  public void updateField(final int id, final String text) {
+    switch(id) {
+      case 0:
+        this.updateItemName(text);
+        break;
+
+      case 1:
+        this.updateItemDesc(text);
+        break;
+    }
   }
 
   public void updateItemName(final String name) {
-    final ItemStack itemstack = this.getSlot(0).getStack();
+    final ItemStack stack = this.inventory.getStackInSlot(0);
 
     if(StringUtils.isBlank(name)) {
-      itemstack.clearCustomName();
+      stack.clearCustomName();
     } else {
-      itemstack.setStackDisplayName(name);
+      stack.setStackDisplayName(name);
+    }
+  }
+
+  public void updateItemDesc(final String desc) {
+    final ItemStack stack = this.inventory.getStackInSlot(0);
+    final NBTTagCompound display = stack.getOrCreateSubCompound("display");
+
+    if(StringUtils.isBlank(desc)) {
+      if(display.hasKey("Desc")) {
+        display.removeTag("Desc");
+      }
+    } else {
+      display.setString("Desc", desc);
     }
   }
 }

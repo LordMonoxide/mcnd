@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 import us.corielicio.mcnd.Mcnd;
 import us.corielicio.mcnd.containers.ContainerDynamicItem;
 import us.corielicio.mcnd.guis.controls.Icon;
-import us.corielicio.mcnd.packets.PacketDynamicItemRename;
+import us.corielicio.mcnd.packets.PacketDynamicItemSync;
 
 import java.io.IOException;
 
@@ -27,6 +27,7 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
   private Icon iconDesc;
   private Icon iconSprite;
   private GuiTextField txtName;
+  private GuiTextField txtDesc;
 
   public GuiDynamicItem(final ContainerDynamicItem container) {
     super(container);
@@ -36,17 +37,23 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
   @Override
   public void initGui() {
     super.initGui();
+
     Keyboard.enableRepeatEvents(true);
+
     this.txtName = new GuiTextField(0, this.fontRenderer, this.guiLeft + 28, this.guiTop + this.fontRenderer.FONT_HEIGHT + 10, 103, 12);
     this.txtName.setTextColor(0xFFFFFFFF);
     this.txtName.setDisabledTextColour(0xFFFFFFFF);
-    this.txtName.setMaxStringLength(35);
-    this.container.removeListener(this);
-    this.container.addListener(this);
+
+    this.txtDesc = new GuiTextField(1, this.fontRenderer, this.guiLeft + 28, this.guiTop + this.fontRenderer.FONT_HEIGHT + 30, 103, 12);
+    this.txtDesc.setTextColor(0xFFFFFFFF);
+    this.txtDesc.setDisabledTextColour(0xFFFFFFFF);
 
     this.iconName = new Icon(this, 8, 16, new ItemStack(Items.NAME_TAG), I18n.format("gui_dynamic_item.item_name"));
     this.iconDesc = new Icon(this, 8, 36, new ItemStack(Items.BOOK), I18n.format("gui_dynamic_item.item_desc"));
     this.iconSprite = new Icon(this, 8, 56, new ItemStack(Items.TOTEM_OF_UNDYING), I18n.format("gui_dynamic_item.item_sprite"));
+
+    this.container.removeListener(this);
+    this.container.addListener(this);
   }
 
   @Override
@@ -65,6 +72,7 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     GlStateManager.disableLighting();
     GlStateManager.disableBlend();
     this.txtName.drawTextBox();
+    this.txtDesc.drawTextBox();
 
     this.renderHoveredToolTip(mouseX, mouseY);
     this.iconName.drawTooltip(mouseX, mouseY);
@@ -91,30 +99,38 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
     this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
   }
 
-  private void renderToolTip(final String text, final int x, final int y) {
-    this.drawHoveringText(text, x, y);
-  }
-
   @Override
   protected void keyTyped(final char typedChar, final int keyCode) throws IOException {
     if(this.txtName.textboxKeyTyped(typedChar, keyCode)) {
-      this.renameItem();
-    } else {
-      super.keyTyped(typedChar, keyCode);
+      this.updateName();
+      return;
     }
+
+    if(this.txtDesc.textboxKeyTyped(typedChar, keyCode)) {
+      this.updateDesc();
+      return;
+    }
+
+    super.keyTyped(typedChar, keyCode);
   }
 
-  private void renameItem() {
+  private void updateName() {
     final String s = this.txtName.getText();
+    this.container.updateItemName(s);
+    PacketDynamicItemSync.send(0, s);
+  }
 
-    this.container.getOutput().setStackDisplayName(s);
-    PacketDynamicItemRename.send(s);
+  private void updateDesc() {
+    final String s = this.txtDesc.getText();
+    this.container.updateItemDesc(s);
+    PacketDynamicItemSync.send(1, s);
   }
 
   @Override
   protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException {
     super.mouseClicked(mouseX, mouseY, mouseButton);
     this.txtName.mouseClicked(mouseX, mouseY, mouseButton);
+    this.txtDesc.mouseClicked(mouseX, mouseY, mouseButton);
   }
 
   @Override
@@ -129,7 +145,7 @@ public class GuiDynamicItem extends GuiContainer implements IContainerListener {
       this.txtName.setEnabled(!stack.isEmpty());
 
       if(!stack.isEmpty()) {
-        this.renameItem();
+        this.updateName();
       }
     }
   }

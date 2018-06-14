@@ -13,6 +13,6 @@ public class McndNet {
   private static int id = 0;
 
   public static void register() {
-    CHANNEL.registerMessage(PacketDynamicItemRename.Handler.class, PacketDynamicItemRename.class, id++, Side.SERVER);
+    CHANNEL.registerMessage(PacketDynamicItemSync.Handler.class, PacketDynamicItemSync.class, id++, Side.SERVER);
   }
 }
