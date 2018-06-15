@@ -5,3 +5,5 @@ gui_dynamic_item.name=Custom Item Builder
 gui_dynamic_item.item_name=Name
 gui_dynamic_item.item_desc=Description
 gui_dynamic_item.item_sprite=Sprite (place an item here to copy it)
+
+item.dynamic_item.name=Dynamic Item
