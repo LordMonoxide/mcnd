@@ -36,15 +36,21 @@ public class ContainerDynamicItem extends Container {
       @Override
       protected void onContentsChanged(final int slot) {
         if(slot == 1) {
-          final ItemStack stack = this.getStackInSlot(0);
+          final ItemStack dynamicStack = this.getStackInSlot(0);
 
-          if(!stack.isEmpty()) {
-            final ResourceLocation location = this.getStackInSlot(1).getItem().getRegistryName();
-            final NBTTagCompound sprite = new NBTTagCompound();
-            sprite.setString("Domain", location.getResourceDomain());
-            sprite.setString("Path", location.getResourcePath());
+          if(!dynamicStack.isEmpty()) {
+            final ItemStack spriteStack = this.getStackInSlot(1);
 
-            stack.getOrCreateSubCompound("display").setTag("Sprite", sprite);
+            if(!spriteStack.isEmpty()) {
+              final ResourceLocation location = spriteStack.getItem().getRegistryName();
+              final NBTTagCompound sprite = new NBTTagCompound();
+              sprite.setString("Domain", location.getResourceDomain());
+              sprite.setString("Path", location.getResourcePath());
+
+              dynamicStack.getOrCreateSubCompound("display").setTag("Sprite", sprite);
+            } else {
+              dynamicStack.getOrCreateSubCompound("display").removeTag("Sprite");
+            }
           }
         }
       }
