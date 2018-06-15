@@ -12,6 +12,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.apache.commons.lang3.StringUtils;
 import us.corielicio.mcnd.containers.slots.SlotOutput;
+import us.corielicio.mcnd.items.DynamicItem;
 import us.corielicio.mcnd.items.McndItems;
 
 import javax.annotation.Nonnull;
@@ -39,17 +40,27 @@ public class ContainerDynamicItem extends Container {
           final ItemStack dynamicStack = this.getStackInSlot(0);
 
           if(!dynamicStack.isEmpty()) {
+            final NBTTagCompound display = dynamicStack.getOrCreateSubCompound("display");
             final ItemStack spriteStack = this.getStackInSlot(1);
 
-            if(!spriteStack.isEmpty()) {
-              final ResourceLocation location = spriteStack.getItem().getRegistryName();
-              final NBTTagCompound sprite = new NBTTagCompound();
-              sprite.setString("Domain", location.getResourceDomain());
-              sprite.setString("Path", location.getResourcePath());
+            if(spriteStack.getItem() instanceof DynamicItem) {
+              final NBTTagCompound spriteDisplay = spriteStack.getOrCreateSubCompound("display");
 
-              dynamicStack.getOrCreateSubCompound("display").setTag("Sprite", sprite);
+              if(spriteDisplay.hasKey("Sprite")) {
+                display.setTag("Sprite", spriteDisplay.getCompoundTag("Sprite"));
+              } else {
+                display.removeTag("Sprite");
+              }
             } else {
-              dynamicStack.getOrCreateSubCompound("display").removeTag("Sprite");
+              if(!spriteStack.isEmpty()) {
+                final NBTTagCompound sprite = new NBTTagCompound();
+                final ResourceLocation location = spriteStack.getItem().getRegistryName();
+                sprite.setString("Domain", location.getResourceDomain());
+                sprite.setString("Path", location.getResourcePath());
+                display.setTag("Sprite", sprite);
+              } else {
+                display.removeTag("Sprite");
+              }
             }
           }
         }
