@@ -67,6 +67,19 @@ public class ContainerDynamicItem extends Container {
   }
 
   @Override
+  public void onContainerClosed(final EntityPlayer player) {
+    for(int i = 1; i < this.inventory.getSlots(); i++) {
+      final ItemStack stack = this.inventory.getStackInSlot(i);
+
+      if(!stack.isEmpty()) {
+        player.dropItem(stack, false);
+      }
+    }
+
+    super.onContainerClosed(player);
+  }
+
+  @Override
   public boolean canInteractWith(final EntityPlayer player) {
     return true;
   }
