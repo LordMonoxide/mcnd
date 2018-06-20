@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.utils;
+package us.corielicio.mcnd.utils.loader;
 
 import us.corielicio.mcnd.dice.ConstantBonus;
 import us.corielicio.mcnd.dice.Dice;
@@ -7,20 +7,22 @@ import us.corielicio.mcnd.dice.StatBonus;
 import us.corielicio.mcnd.stats.Stats;
 
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class Assertions {
-  private Assertions() { }
+public final class ObjectBuilder {
+  private ObjectBuilder() { }
 
-  public static void check(final Consumer<Assertions> callback) throws AssertionException {
-    final Assertions assertions = new Assertions();
-    callback.accept(assertions);
+  public static <T> T build(final Map<String, Object> root, final BiFunction<ObjectBuilder, Map<String, Object>, T> callback) throws AssertionException {
+    final ObjectBuilder builder = new ObjectBuilder();
+    final T ret = callback.apply(builder, root);
 
-    if(!assertions.messages.isEmpty()) {
-      throw new AssertionException(assertions.messages.toArray(new String[0]));
+    if(!builder.messages.isEmpty()) {
+      throw new AssertionException(builder.messages.toArray(new String[0]));
     }
+
+    return ret;
   }
 
   private final List<String> messages = new ArrayList<>();

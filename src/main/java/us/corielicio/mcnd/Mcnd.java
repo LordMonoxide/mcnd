@@ -15,6 +15,8 @@ import us.corielicio.mcnd.equipment.armour.Armours;
 import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.packets.McndNet;
 import us.corielicio.mcnd.stats.CapabilityCharacterStats;
+import us.corielicio.mcnd.utils.loader.GameData;
+import us.corielicio.mcnd.utils.loader.Loader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -36,6 +38,9 @@ public class Mcnd {
 
   public static Logger logger;
 
+  public static final Armours ARMOUR = new Armours();
+  public static final DndClasses CLASSES = new DndClasses();
+
   @EventHandler
   public void preInit(final FMLPreInitializationEvent event) throws IOException {
     logger = event.getModLog();
@@ -44,8 +49,8 @@ public class Mcnd {
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
 
-    this.loadArmour(event);
-    this.loadClasses(event);
+    this.loadGameData(event, ARMOUR, "armour");
+    this.loadGameData(event, CLASSES, "classes");
 
     proxy.preInit(event);
   }
@@ -66,33 +71,18 @@ public class Mcnd {
     return new ResourceLocation(MODID, name);
   }
 
-  private void loadArmour(final FMLPreInitializationEvent event) throws IOException {
+  private void loadGameData(final FMLPreInitializationEvent event, final Loader<? extends GameData> loader, final String directory) throws IOException {
     // Load from assets
     try {
-      Armours.addArmourInDirectory(Paths.get(this.getClass().getClassLoader().getResource("assets/" + MODID + "/armour").toURI()));
+      loader.addFromDirectory(Paths.get(this.getClass().getClassLoader().getResource("assets/" + MODID + '/' + directory).toURI()));
     } catch(final URISyntaxException e) {
-      Mcnd.logger.error("Error getting assets/classes/ directory URI (this shouldn't happen)", e);
+      logger.error("Error getting assets/" + directory + "/ directory URI (this shouldn't happen)", e);
     }
 
     // Load from config
-    final Path configDir = event.getModConfigurationDirectory().toPath().resolve("mcnd/armour");
+    final Path configDir = event.getModConfigurationDirectory().toPath().resolve(MODID + '/' + directory);
     Files.createDirectories(configDir);
 
-    Armours.addArmourInDirectory(configDir);
-  }
-
-  private void loadClasses(final FMLPreInitializationEvent event) throws IOException {
-    // Load from assets
-    try {
-      DndClasses.addClassesInDirectory(Paths.get(this.getClass().getClassLoader().getResource("assets/" + MODID + "/classes").toURI()));
-    } catch(final URISyntaxException e) {
-      Mcnd.logger.error("Error getting assets/classes/ directory URI (this shouldn't happen)", e);
-    }
-
-    // Load from config
-    final Path configDir = event.getModConfigurationDirectory().toPath().resolve("mcnd/classes");
-    Files.createDirectories(configDir);
-
-    DndClasses.addClassesInDirectory(configDir);
+    loader.addFromDirectory(configDir);
   }
 }
