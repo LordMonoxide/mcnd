@@ -1,0 +1,9 @@
+id: leather
+name: Leather
+cost: 1000
+ac:
+  - 11
+  - DEX
+weight: 10
+strengthRequired: 0
+stealthDisadvantage: false

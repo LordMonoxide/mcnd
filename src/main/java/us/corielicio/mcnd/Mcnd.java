@@ -10,9 +10,17 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
+import us.corielicio.mcnd.classes.DndClasses;
+import us.corielicio.mcnd.equipment.armour.Armours;
 import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.packets.McndNet;
 import us.corielicio.mcnd.stats.CapabilityCharacterStats;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Mod(modid = Mcnd.MODID, name = Mcnd.NAME, version = Mcnd.VERSION)
 public class Mcnd {
@@ -29,12 +37,15 @@ public class Mcnd {
   public static Logger logger;
 
   @EventHandler
-  public void preInit(final FMLPreInitializationEvent event) {
+  public void preInit(final FMLPreInitializationEvent event) throws IOException {
     logger = event.getModLog();
 
     CapabilityCharacterStats.register();
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
+
+    this.loadArmour(event);
+    this.loadClasses(event);
 
     proxy.preInit(event);
   }
@@ -53,5 +64,35 @@ public class Mcnd {
 
   public static ResourceLocation resource(final String name) {
     return new ResourceLocation(MODID, name);
+  }
+
+  private void loadArmour(final FMLPreInitializationEvent event) throws IOException {
+    // Load from assets
+    try {
+      Armours.addArmourInDirectory(Paths.get(this.getClass().getClassLoader().getResource("assets/" + MODID + "/armour").toURI()));
+    } catch(final URISyntaxException e) {
+      Mcnd.logger.error("Error getting assets/classes/ directory URI (this shouldn't happen)", e);
+    }
+
+    // Load from config
+    final Path configDir = event.getModConfigurationDirectory().toPath().resolve("mcnd/armour");
+    Files.createDirectories(configDir);
+
+    Armours.addArmourInDirectory(configDir);
+  }
+
+  private void loadClasses(final FMLPreInitializationEvent event) throws IOException {
+    // Load from assets
+    try {
+      DndClasses.addClassesInDirectory(Paths.get(this.getClass().getClassLoader().getResource("assets/" + MODID + "/classes").toURI()));
+    } catch(final URISyntaxException e) {
+      Mcnd.logger.error("Error getting assets/classes/ directory URI (this shouldn't happen)", e);
+    }
+
+    // Load from config
+    final Path configDir = event.getModConfigurationDirectory().toPath().resolve("mcnd/classes");
+    Files.createDirectories(configDir);
+
+    DndClasses.addClassesInDirectory(configDir);
   }
 }
