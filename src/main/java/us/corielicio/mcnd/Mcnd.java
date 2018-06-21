@@ -1,6 +1,5 @@
 package us.corielicio.mcnd;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -57,8 +56,6 @@ public class Mcnd {
 
   @EventHandler
   public void init(final FMLInitializationEvent event) {
-    logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
     McndNet.register();
   }
 
