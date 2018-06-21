@@ -14,17 +14,39 @@ public class Die {
   private static final Random rand = new Random();
 
   public final int value;
+  protected final int min;
+  protected final int max;
 
   public Die(final int value) {
+    this(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+
+  public Die(final int value, final int min, final int max) {
     this.value = value;
+    this.min = min;
+    this.max = max;
   }
 
   public int roll(final CharacterStats character) {
-    return rand.nextInt(this.value) + 1;
+    return this.clamp(rand.nextInt(this.value) + 1);
+  }
+
+  protected int clamp(final int value) {
+    return Math.max(this.min, Math.min(value, this.max));
   }
 
   @Override
   public String toString() {
-    return "1d" + this.value;
+    String string = "1d" + this.value;
+
+    if(this.min != Integer.MIN_VALUE) {
+      string += " >= " + this.min;
+    }
+
+    if(this.max != Integer.MAX_VALUE) {
+      string += " <= " + this.max;
+    }
+
+    return string;
   }
 }

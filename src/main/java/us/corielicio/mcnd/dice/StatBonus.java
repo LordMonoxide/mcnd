@@ -11,13 +11,28 @@ public class StatBonus extends Die {
     this.stat = stat;
   }
 
+  public StatBonus(final Stats stat, final int min, final int max) {
+    super(0, min, max);
+    this.stat = stat;
+  }
+
   @Override
   public int roll(final CharacterStats character) {
-    return character.stat(this.stat).bonus();
+    return this.clamp(character.stat(this.stat).bonus());
   }
 
   @Override
   public String toString() {
-    return this.stat.name();
+    String string = this.stat.name();
+
+    if(this.min != Integer.MIN_VALUE) {
+      string += " >= " + this.min;
+    }
+
+    if(this.max != Integer.MAX_VALUE) {
+      string += " <= " + this.max;
+    }
+
+    return string;
   }
 }
