@@ -1,0 +1,12 @@
+id: javelin
+name: Javelin
+type: melee
+category: simple
+damage: 1d6
+damageType: piercing
+cost: 50
+weight: 2
+properties:
+  - property: thrown
+    ideal: 30
+    max: 120

@@ -1,0 +1,8 @@
+id: mace
+name: Mace
+type: melee
+category: simple
+damage: 1d6
+damageType: bludgeoning
+cost: 500
+weight: 4

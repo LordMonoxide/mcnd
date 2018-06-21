@@ -1,0 +1,14 @@
+id: spear
+name: Spear
+type: melee
+category: simple
+damage: 1d6
+damageType: piercing
+cost: 100
+weight: 3
+properties:
+  - property: thrown
+    ideal: 20
+    max: 60
+  - property: versatile
+    damage: 1d8

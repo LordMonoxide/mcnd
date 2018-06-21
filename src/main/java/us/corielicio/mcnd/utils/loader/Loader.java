@@ -14,7 +14,7 @@ public abstract class Loader<T extends GameData> {
   private final Map<String, T> data = new HashMap<>();
   private final String type;
 
-  public Loader(final String type) {
+  protected Loader(final String type) {
     this.type = type;
   }
 

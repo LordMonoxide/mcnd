@@ -1,0 +1,10 @@
+id: greatclub
+name: Greatclub
+type: melee
+category: simple
+damage: 1d8
+damageType: bludgeoning
+cost: 20
+weight: 10
+properties:
+  - property: two_handed

@@ -1,0 +1,14 @@
+id: dagger
+name: dagger
+type: melee
+category: simple
+damage: 1d4
+damageType: piercing
+cost: 200
+weight: 1
+properties:
+  - property: light
+  - property: finesse
+  - property: thrown
+    ideal: 20
+    max: 60

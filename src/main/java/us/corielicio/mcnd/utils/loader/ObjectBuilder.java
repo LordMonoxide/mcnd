@@ -15,7 +15,10 @@ import java.util.regex.Pattern;
 public final class ObjectBuilder {
   private ObjectBuilder() { }
 
-  public static <T> T build(final Map<String, Object> root, final BiFunction<ObjectBuilder, Map<String, Object>, T> callback) throws AssertionException {
+  @FunctionalInterface
+  public interface BuilderFunction<T> extends BiFunction<ObjectBuilder, Map<String, Object>, T> { }
+
+  public static <T> T build(final Map<String, Object> root, final BuilderFunction<T> callback) throws AssertionException {
     final ObjectBuilder builder = new ObjectBuilder();
     final T ret = callback.apply(builder, root);
 
@@ -112,6 +115,26 @@ public final class ObjectBuilder {
     return false;
   }
 
+  public Map<String, Object> map(final Object object, final String message) {
+    if(object instanceof Map) {
+      //noinspection unchecked
+      return (Map<String, Object>)object;
+    }
+
+    this.messages.add(message);
+    return new HashMap<>();
+  }
+
+  public List<Object> list(final Object object, final String message) {
+    if(object instanceof List) {
+      //noinspection unchecked
+      return (List<Object>)object;
+    }
+
+    this.messages.add(message);
+    return new ArrayList<>();
+  }
+
   @Nullable
   public <T extends Enum<T>> T enumeration(final Object object, final Class<T> enumClass, final String message) {
     try {
@@ -122,10 +145,21 @@ public final class ObjectBuilder {
     return null;
   }
 
+  @Nullable
+  public <T> T notNull(@Nullable final T object, final String message) {
+    if(object != null) {
+      return object;
+    }
+
+    this.messages.add(message);
+    return null;
+  }
+
   public static class AssertionException extends Exception {
-    private final String[] messages;
+    public final String[] messages;
 
     public AssertionException(final String[] messages) {
+      super(String.join(", ", messages));
       this.messages = messages;
     }
   }

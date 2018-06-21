@@ -1,0 +1,10 @@
+id: club
+name: Club
+type: melee
+category: simple
+damage: 1d4
+damageType: bludgeoning
+cost: 10
+weight: 2
+properties:
+  - property: light

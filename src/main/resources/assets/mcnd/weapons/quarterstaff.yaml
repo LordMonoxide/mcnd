@@ -1,0 +1,11 @@
+id: quarterstaff
+name: Quaterstaff
+type: melee
+category: simple
+damage: 1d6
+damageType: bludgeoning
+cost: 20
+weight: 4
+properties:
+  - property: versatile
+    damage: 1d8

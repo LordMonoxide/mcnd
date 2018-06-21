@@ -1,0 +1,10 @@
+id: sickle
+name: Sickle
+type: melee
+category: simple
+damage: 1d4
+damageType: slashing
+cost: 100
+weight: 2
+properties:
+  - property: light

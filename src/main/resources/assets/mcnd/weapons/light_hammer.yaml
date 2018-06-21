@@ -1,0 +1,13 @@
+id: light_hammer
+name: Light Hammer
+type: melee
+category: simple
+damage: 1d4
+damageType: bludgeoning
+cost: 200
+weight: 2
+properties:
+  - property: light
+  - property: thrown
+    ideal: 20
+    max: 60

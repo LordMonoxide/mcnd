@@ -1,0 +1,13 @@
+id: handaxe
+name: Handaxe
+type: melee
+category: simple
+damage: 1d6
+damageType: slashing
+cost: 500
+weight: 2
+properties:
+  - property: light
+  - property: thrown
+    ideal: 20
+    max: 60

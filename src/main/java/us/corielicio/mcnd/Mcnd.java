@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 import us.corielicio.mcnd.classes.DndClasses;
 import us.corielicio.mcnd.equipment.armour.Armours;
+import us.corielicio.mcnd.equipment.weapons.Weapons;
+import us.corielicio.mcnd.equipment.weapons.ammunition.Ammunitions;
 import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.packets.McndNet;
 import us.corielicio.mcnd.stats.CapabilityCharacterStats;
@@ -37,6 +39,8 @@ public class Mcnd {
 
   public static Logger logger;
 
+  public static final Ammunitions AMMUNITION = new Ammunitions();
+  public static final Weapons WEAPONS = new Weapons();
   public static final Armours ARMOUR = new Armours();
   public static final DndClasses CLASSES = new DndClasses();
 
@@ -48,6 +52,8 @@ public class Mcnd {
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
 
+    this.loadGameData(event, AMMUNITION, "ammunition");
+    this.loadGameData(event, WEAPONS, "weapons");
     this.loadGameData(event, ARMOUR, "armour");
     this.loadGameData(event, CLASSES, "classes");
 
