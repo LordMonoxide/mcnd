@@ -25,12 +25,14 @@ public class Weapons extends Loader<Weapon> {
 
     final Map<String, WeaponProperty> properties = new HashMap<>();
 
-    for(final Object item : builder.list(root.get("properties"), "Invalid properties")) {
-      final Map<String, Object> property = builder.map(item, "Invalid property");
-      final String propName = builder.string(property.get("property"), "Invalid property name");
-      final WeaponProperty prop = builder.notNull(WeaponProperty.loadWeaponProperty(propName, builder, property), "Invalid property " + propName);
+    if(root.containsKey("properties")) {
+      for(final Object item : builder.list(root.get("properties"), "Invalid properties")) {
+        final Map<String, Object> property = builder.map(item, "Invalid property");
+        final String propName = builder.string(property.get("property"), "Invalid property name");
+        final WeaponProperty prop = builder.notNull(WeaponProperty.loadWeaponProperty(propName, builder, property), "Invalid property " + propName);
 
-      properties.put(propName, prop);
+        properties.put(propName, prop);
+      }
     }
 
     return new Weapon(id, name, type, category, damage, damageType, cost, weight, properties);
