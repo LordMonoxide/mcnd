@@ -1,5 +1,6 @@
 id: leather
 name: Leather
+type: light
 cost: 1000
 ac:
   - 11
