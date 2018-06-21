@@ -1,0 +1,9 @@
+id: splint
+name: Splint
+type: heavy
+cost: 20000
+ac:
+  - 17
+weight: 60
+strengthRequired: 15
+stealthDisadvantage: true

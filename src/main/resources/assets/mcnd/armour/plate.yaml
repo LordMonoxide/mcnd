@@ -1,0 +1,9 @@
+id: plate
+name: Plate
+type: heavy
+cost: 150000
+ac:
+  - 18
+weight: 65
+strengthRequired: 15
+stealthDisadvantage: true

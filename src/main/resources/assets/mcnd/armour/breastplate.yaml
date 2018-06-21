@@ -1,0 +1,11 @@
+id: breastplate
+name: Breastplate
+type: medium
+cost: 40000
+ac:
+  - 14
+  - type: DEX
+    max: 2
+weight: 20
+strengthRequired: 0
+stealthDisadvantage: false

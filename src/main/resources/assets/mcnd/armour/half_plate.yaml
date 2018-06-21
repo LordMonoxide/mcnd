@@ -1,0 +1,11 @@
+id: half_plate
+name: Half Plate
+type: medium
+cost: 75000
+ac:
+  - 15
+  - type: DEX
+    max: 2
+weight: 40
+strengthRequired: 0
+stealthDisadvantage: true

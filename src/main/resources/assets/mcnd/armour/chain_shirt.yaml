@@ -1,0 +1,11 @@
+id: chain_shirt
+name: Chain Shirt
+type: medium
+cost: 5000
+ac:
+  - 13
+  - type: DEX
+    max: 2
+weight: 20
+strengthRequired: 0
+stealthDisadvantage: false

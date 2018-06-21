@@ -1,0 +1,11 @@
+id: hide
+name: Hide
+type: medium
+cost: 1000
+ac:
+  - 12
+  - type: DEX
+    max: 2
+weight: 12
+strengthRequired: 0
+stealthDisadvantage: false

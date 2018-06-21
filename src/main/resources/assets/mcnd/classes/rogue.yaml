@@ -1,7 +1,6 @@
 id: rogue
 name: Rogue
-hitDie:
-  - 1d8
+hitDie: 1d8
 hitPointsFirstLevel:
   - 8
   - CON

@@ -1,0 +1,10 @@
+id: studded_leather
+name: Studded Leather
+type: light
+cost: 4500
+ac:
+  - 12
+  - DEX
+weight: 13
+strengthRequired: 0
+stealthDisadvantage: false

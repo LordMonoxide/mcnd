@@ -1,0 +1,11 @@
+id: scale_mail
+name: Scale Mail
+type: medium
+cost: 5000
+ac:
+  - 14
+  - type: DEX
+    max: 2
+weight: 45
+strengthRequired: 0
+stealthDisadvantage: true

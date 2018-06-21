@@ -1,0 +1,10 @@
+id: padded
+name: Padded
+type: light
+cost: 500
+ac:
+  - 11
+  - DEX
+weight: 8
+strengthRequired: 0
+stealthDisadvantage: true
