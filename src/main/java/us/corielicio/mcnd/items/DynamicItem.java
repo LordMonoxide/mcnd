@@ -31,19 +31,20 @@ public class DynamicItem extends Item {
       tooltip.add(display.getString("Desc"));
     }
 
-    if(stack.getTagCompound().hasKey("weapon")) {
-      final Weapon weapon = Mcnd.WEAPONS.get(stack.getSubCompound("weapon").getString("id"));
+    final Weapon weapon = getWeapon(stack);
+    if(weapon != null) {
       tooltip.add(I18n.format("weapon.name") + ", " + I18n.format(weapon.type.lang) + ", " + I18n.format(weapon.category.lang));
       tooltip.add(I18n.format("weapon.damage", weapon.damage, I18n.format(weapon.damageType.lang)));
     }
 
-    if(stack.getTagCompound().hasKey("armour")) {
-      final Armour armour = Mcnd.ARMOUR.get(stack.getSubCompound("armour").getString("id"));
+    final Armour armour = getArmour(stack);
+    if(armour != null) {
       tooltip.add(I18n.format("armour.name") + ", " + I18n.format(armour.type.lang));
       tooltip.add(I18n.format("armour.ac", armour.ac));
     }
 
-    if(stack.getTagCompound().hasKey("ammo")) {
+    final Ammunition ammo = getAmmo(stack);
+    if(ammo != null) {
       tooltip.add(I18n.format("ammo.name"));
     }
   }
@@ -55,6 +56,15 @@ public class DynamicItem extends Item {
     stack.setStackDisplayName(McndItems.WEAPON.get(weapon).getItemStackDisplayName(ItemStack.EMPTY));
   }
 
+  @Nullable
+  public static Weapon getWeapon(final ItemStack stack) {
+    if(!stack.getTagCompound().hasKey("weapon")) {
+      return null;
+    }
+
+    return Mcnd.WEAPONS.get(stack.getSubCompound("weapon").getString("id"));
+  }
+
   public static void addArmour(final ItemStack stack, final Armour armour) {
     final NBTTagCompound nbt = stack.getOrCreateSubCompound("armour");
     nbt.setString("id", armour.id);
@@ -62,10 +72,28 @@ public class DynamicItem extends Item {
     stack.setStackDisplayName(McndItems.ARMOUR.get(armour).getItemStackDisplayName(ItemStack.EMPTY));
   }
 
+  @Nullable
+  public static Armour getArmour(final ItemStack stack) {
+    if(!stack.getTagCompound().hasKey("armour")) {
+      return null;
+    }
+
+    return Mcnd.ARMOUR.get(stack.getSubCompound("armour").getString("id"));
+  }
+
   public static void addAmmo(final ItemStack stack, final Ammunition ammo) {
     final NBTTagCompound nbt = stack.getOrCreateSubCompound("ammo");
     nbt.setString("id", ammo.id);
 
     stack.setStackDisplayName(McndItems.AMMO.get(ammo).getItemStackDisplayName(ItemStack.EMPTY));
+  }
+
+  @Nullable
+  public static Ammunition getAmmo(final ItemStack stack) {
+    if(!stack.getTagCompound().hasKey("ammo")) {
+      return null;
+    }
+
+    return Mcnd.AMMUNITION.get(stack.getSubCompound("ammo").getString("id"));
   }
 }
