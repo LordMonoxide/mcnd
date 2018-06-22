@@ -16,7 +16,12 @@ public class CommandDynamicItem extends CommandBase {
 
   @Override
   public String getUsage(final ICommandSender sender) {
-    return "command.dynamic_item";
+    return "commands.dynamic_item.usage";
+  }
+
+  @Override
+  public int getRequiredPermissionLevel() {
+    return 2;
   }
 
   @Override

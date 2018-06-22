@@ -14,8 +14,7 @@ import net.minecraftforge.client.model.*;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import us.corielicio.mcnd.commands.CommandDynamicItem;
-import us.corielicio.mcnd.commands.CommandShowCharacterSheet;
+import us.corielicio.mcnd.commands.*;
 import us.corielicio.mcnd.items.McndItems;
 
 import javax.annotation.Nullable;
@@ -64,5 +63,8 @@ public class ClientProxy implements IProxy {
   public void serverStarting(final FMLServerStartingEvent event) {
     event.registerServerCommand(new CommandDynamicItem());
     event.registerServerCommand(new CommandShowCharacterSheet());
+    event.registerServerCommand(new CommandWeapon());
+    event.registerServerCommand(new CommandArmour());
+    event.registerServerCommand(new CommandAmmo());
   }
 }

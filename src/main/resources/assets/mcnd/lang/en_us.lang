@@ -8,6 +8,16 @@ gui_dynamic_item.item_sprite=Sprite (place an item here to copy it)
 
 item.dynamic_item.name=Dynamic Item
 
+# Commands
+commands.dynamic_item.usage=Usage: /dynamic-item
+
+commands.weapon.usage=Usage: /weapon <name>
+commands.weapon.invalid_weapon_id=Invalid weapon ID
+commands.armour.usage=Usage: /armour <name>
+commands.armour.invalid_armour_id=Invalid armour ID
+commands.ammo.usage=Usage: /ammo <name>
+commands.ammo.invalid_ammo_id=Invalid ammo ID
+
 # Ammo
 ammo.name=Ammunition
 
