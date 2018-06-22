@@ -1,0 +1,14 @@
+id: shortbow
+name: Shortbow
+type: ranged
+category: simple
+damage: 1d6
+damageType: piercing
+cost: 2500
+weight: 2
+properties:
+  - property: ammunition
+    ammunition: arrow
+    ideal: 80
+    max: 320
+  - property: two_handed

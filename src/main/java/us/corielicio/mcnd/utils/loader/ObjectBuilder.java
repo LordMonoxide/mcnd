@@ -18,12 +18,12 @@ public final class ObjectBuilder {
   @FunctionalInterface
   public interface BuilderFunction<T> extends BiFunction<ObjectBuilder, Map<String, Object>, T> { }
 
-  public static <T> T build(final Map<String, Object> root, final BuilderFunction<T> callback) throws AssertionException {
+  public static <T> T build(final Map<String, Object> root, final BuilderFunction<T> callback) throws ObjectBuilderException {
     final ObjectBuilder builder = new ObjectBuilder();
     final T ret = callback.apply(builder, root);
 
     if(!builder.messages.isEmpty()) {
-      throw new AssertionException(builder.messages.toArray(new String[0]));
+      throw new ObjectBuilderException(builder.messages.toArray(new String[0]));
     }
 
     return ret;
@@ -38,7 +38,7 @@ public final class ObjectBuilder {
       return (String)object;
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return "";
   }
 
@@ -93,7 +93,7 @@ public final class ObjectBuilder {
       }
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return new Dice();
   }
 
@@ -102,7 +102,20 @@ public final class ObjectBuilder {
       return (Integer)object;
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
+    return 0;
+  }
+
+  public float decimal(final Object object, final String message) {
+    if(object instanceof Double) {
+      return ((Double)object).floatValue();
+    }
+
+    if(object instanceof Integer) {
+      return ((Integer)object).floatValue();
+    }
+
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return 0;
   }
 
@@ -111,7 +124,7 @@ public final class ObjectBuilder {
       return (Boolean)object;
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return false;
   }
 
@@ -121,7 +134,7 @@ public final class ObjectBuilder {
       return (Map<String, Object>)object;
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return new HashMap<>();
   }
 
@@ -131,7 +144,7 @@ public final class ObjectBuilder {
       return (List<Object>)object;
     }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return new ArrayList<>();
   }
 
@@ -141,7 +154,7 @@ public final class ObjectBuilder {
       return T.valueOf(enumClass, this.string(object, message).toUpperCase(Locale.ENGLISH));
     } catch(final IllegalArgumentException e) { }
 
-    this.messages.add(message);
+    this.messages.add(message + " (" + object.getClass().getSimpleName() + ": " + object + ')');
     return null;
   }
 
@@ -155,10 +168,10 @@ public final class ObjectBuilder {
     return null;
   }
 
-  public static class AssertionException extends Exception {
+  public static class ObjectBuilderException extends Exception {
     public final String[] messages;
 
-    public AssertionException(final String[] messages) {
+    public ObjectBuilderException(final String[] messages) {
       super(String.join(", ", messages));
       this.messages = messages;
     }

@@ -21,7 +21,7 @@ public class Weapons extends Loader<Weapon> {
     final Dice damage = builder.dice(root.get("damage"), "Invalid damage");
     final DamageType damageType = builder.enumeration(root.get("damageType"), DamageType.class, "Invalid damageType");
     final int cost = builder.integer(root.get("cost"), "Invalid cost");
-    final int weight = builder.integer(root.get("weight"), "Invalid weight");
+    final float weight = builder.decimal(root.get("weight"), "Invalid weight");
 
     final Map<String, WeaponProperty> properties = new HashMap<>();
 

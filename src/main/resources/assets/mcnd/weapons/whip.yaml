@@ -1,0 +1,11 @@
+id: whip
+name: Whip
+type: melee
+category: martial
+damage: 1d4
+damageType: slashing
+cost: 200
+weight: 3
+properties:
+  - property: finesse
+  - property: reach

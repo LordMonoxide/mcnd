@@ -1,0 +1,11 @@
+id: longsword
+name: Longsword
+type: melee
+category: martial
+damage: 1d8
+damageType: slashing
+cost: 1500
+weight: 3
+properties:
+  - property: versatile
+    damage: 1d10

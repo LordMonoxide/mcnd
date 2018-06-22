@@ -1,0 +1,12 @@
+id: glaive
+name: Glaive
+type: melee
+category: martial
+damage: 1d10
+damageType: slashing
+cost: 2000
+weight: 6
+properties:
+  - property: heavy
+  - property: reach
+  - property: two_handed

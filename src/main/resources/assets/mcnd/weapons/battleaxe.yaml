@@ -1,0 +1,11 @@
+id: battleaxe
+name: Battleaxe
+type: melee
+category: martial
+damage: 1d8
+damageType: slashing
+cost: 1000
+weight: 4
+properties:
+  - property: versatile
+    damage: 1d10

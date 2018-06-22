@@ -1,0 +1,11 @@
+id: shortsword
+name: Shortsword
+type: melee
+category: martial
+damage: 1d6
+damageType: piercing
+cost: 1000
+weight: 2
+properties:
+  - property: finesse
+  - property: light

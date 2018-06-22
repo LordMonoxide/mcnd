@@ -28,13 +28,13 @@ public abstract class Loader<T extends GameData> {
         this.addFromPath(file);
       } catch(final IOException e) {
         Mcnd.logger.error("Error opening " + this.type, e);
-      } catch(final ObjectBuilder.AssertionException e) {
+      } catch(final ObjectBuilder.ObjectBuilderException e) {
         Mcnd.logger.error("Malformed " + this.type, e);
       }
     }
   }
 
-  public T addFromPath(final Path path) throws ObjectBuilder.AssertionException, IOException {
+  public T addFromPath(final Path path) throws ObjectBuilder.ObjectBuilderException, IOException {
     final Yaml yaml = new Yaml();
 
     final Map<String, Object> root = yaml.load(Files.newInputStream(path, StandardOpenOption.READ));
@@ -50,5 +50,9 @@ public abstract class Loader<T extends GameData> {
     }
 
     return data;
+  }
+
+  public T get(final String id) {
+    return this.data.get(id);
   }
 }

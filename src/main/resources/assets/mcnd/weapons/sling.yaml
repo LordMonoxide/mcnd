@@ -1,0 +1,13 @@
+id: sling
+name: Sling
+type: ranged
+category: simple
+damage: 1d4
+damageType: bludgeoning
+cost: 10
+weight: 0
+properties:
+  - property: ammunition
+    ammunition: sling_bullet
+    ideal: 30
+    max: 120

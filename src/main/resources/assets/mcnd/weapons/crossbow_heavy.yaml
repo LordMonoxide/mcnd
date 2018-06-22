@@ -1,0 +1,16 @@
+id: crossbow_heavy
+name: Crossbow, heavy
+type: ranged
+category: martial
+damage: 1d10
+damageType: piercing
+cost: 5000
+weight: 18
+properties:
+  - property: ammunition
+    ammunition: crossbow_bolt
+    ideal: 100
+    max: 400
+  - property: heavy
+  - property: loading
+  - property: two_handed

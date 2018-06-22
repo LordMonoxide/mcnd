@@ -1,0 +1,15 @@
+id: crossbow_hand
+name: Crossbow, hand
+type: ranged
+category: martial
+damage: 1d6
+damageType: piercing
+cost: 7500
+weight: 3
+properties:
+  - property: ammunition
+    ammunition: crossbow_bolt
+    ideal: 30
+    max: 120
+  - property: light
+  - property: loading

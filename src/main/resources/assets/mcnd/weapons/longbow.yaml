@@ -1,0 +1,15 @@
+id: longbow
+name: Longbow
+type: ranged
+category: martial
+damage: 1d8
+damageType: piercing
+cost: 5000
+weight: 2
+properties:
+  - property: ammunition
+    ammunition: arrow
+    ideal: 150
+    max: 600
+  - property: heavy
+  - property: two_handed

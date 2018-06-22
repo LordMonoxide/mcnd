@@ -1,0 +1,11 @@
+id: maul
+name: Maul
+type: melee
+category: martial
+damage: 2d6
+damageType: bludgeoning
+cost: 1000
+weight: 10
+properties:
+  - property: heavy
+  - property: two_handed

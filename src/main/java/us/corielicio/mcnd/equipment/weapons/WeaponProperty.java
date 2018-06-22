@@ -1,5 +1,6 @@
 package us.corielicio.mcnd.equipment.weapons;
 
+import us.corielicio.mcnd.Mcnd;
 import us.corielicio.mcnd.dice.Dice;
 import us.corielicio.mcnd.utils.loader.ObjectBuilder;
 
@@ -44,15 +45,21 @@ public abstract class WeaponProperty {
 
   public static class Ammunition extends WeaponProperty {
     public final us.corielicio.mcnd.equipment.weapons.ammunition.Ammunition ammunition;
+    public final int ideal;
+    public final int max;
 
     public Ammunition(final ObjectBuilder builder, final Map<String, Object> root) {
-      this(null);
-      //TODO
-      throw new RuntimeException("Ammunition property not yet implemented");
+      this(
+          builder.notNull(Mcnd.AMMUNITION.get(builder.string(root.get("ammunition"), "Malformed ammunition ID")), "Invalid ammunition ID"),
+          builder.integer(root.get("ideal"), "Error getting ideal range"),
+          builder.integer(root.get("max"), "Error getting max range")
+      );
     }
 
-    public Ammunition(final us.corielicio.mcnd.equipment.weapons.ammunition.Ammunition ammunition) {
+    public Ammunition(final us.corielicio.mcnd.equipment.weapons.ammunition.Ammunition ammunition, final int ideal, final int max) {
       this.ammunition = ammunition;
+      this.ideal = ideal;
+      this.max = max;
     }
   }
 

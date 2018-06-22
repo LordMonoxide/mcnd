@@ -1,0 +1,11 @@
+id: scimitar
+name: Scimitar
+type: melee
+category: martial
+damage: 1d6
+damageType: slashing
+cost: 2500
+weight: 3
+properties:
+  - property: finesse
+  - property: light

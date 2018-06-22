@@ -1,0 +1,8 @@
+id: flail
+name: Flail
+type: melee
+category: martial
+damage: 1d8
+damageType: bludgeoning
+cost: 1000
+weight: 2

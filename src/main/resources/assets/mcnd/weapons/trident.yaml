@@ -1,0 +1,14 @@
+id: trident
+name: Trident
+type: melee
+category: martial
+damage: 1d6
+damageType: piercing
+cost: 500
+weight: 4
+properties:
+  - property: thrown
+    ideal: 20
+    max: 60
+  - property: versatile
+    damage: 1d8

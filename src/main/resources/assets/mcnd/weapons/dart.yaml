@@ -1,0 +1,13 @@
+id: dart
+name: Dart
+type: ranged
+category: simple
+damage: 1d4
+damageType: piercing
+cost: 5
+weight: 0.25
+properties:
+  - property: finesse
+  - property: thrown
+    ideal: 20
+    max: 60

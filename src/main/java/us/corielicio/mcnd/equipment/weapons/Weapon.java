@@ -13,11 +13,11 @@ public class Weapon extends GameData {
   private final Dice damage;
   private final DamageType damageType;
   private final int cost;
-  private final int weight;
+  private final float weight;
 
   private final Map<String, WeaponProperty> properties = new HashMap<>();
 
-  public Weapon(final String id, final String name, final WeaponType type, final WeaponCategory category, final Dice damage, final DamageType damageType, final int cost, final int weight, final Map<String, ? extends WeaponProperty> properties) {
+  public Weapon(final String id, final String name, final WeaponType type, final WeaponCategory category, final Dice damage, final DamageType damageType, final int cost, final float weight, final Map<String, ? extends WeaponProperty> properties) {
     super(id);
     this.name = name;
     this.type = type;

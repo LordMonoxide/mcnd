@@ -1,0 +1,11 @@
+id: greataxe
+name: Greataxe
+type: melee
+category: martial
+damage: 1d12
+damageType: slashing
+cost: 3000
+weight: 7
+properties:
+  - property: heavy
+  - property: two_handed
