@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public abstract class Loader<T extends GameData> {
   private final Map<String, T> data = new HashMap<>();
@@ -54,5 +56,17 @@ public abstract class Loader<T extends GameData> {
 
   public T get(final String id) {
     return this.data.get(id);
+  }
+
+  public void forEach(final Consumer<T> consumer) {
+    this.data.values().forEach(consumer);
+  }
+
+  public Stream<T> stream() {
+    return this.data.values().stream();
+  }
+
+  public int size() {
+    return this.data.size();
   }
 }

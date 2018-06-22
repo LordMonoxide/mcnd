@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Weapon extends GameData {
-  private final String name;
-  private final WeaponType type;
-  private final WeaponCategory category;
-  private final Dice damage;
-  private final DamageType damageType;
-  private final int cost;
-  private final float weight;
+  public final String name;
+  public final WeaponType type;
+  public final WeaponCategory category;
+  public final Dice damage;
+  public final DamageType damageType;
+  public final int cost;
+  public final float weight;
 
   private final Map<String, WeaponProperty> properties = new HashMap<>();
 

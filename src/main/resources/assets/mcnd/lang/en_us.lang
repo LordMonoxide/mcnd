@@ -7,3 +7,78 @@ gui_dynamic_item.item_desc=Description
 gui_dynamic_item.item_sprite=Sprite (place an item here to copy it)
 
 item.dynamic_item.name=Dynamic Item
+
+# Ammo
+ammo.name=Ammunition
+
+item.ammo.arrow.name=Arrow
+item.ammo.blowgun_needle.name=Blowgun Needle
+item.ammo.crossbow_bolt.name=Crossbow Bolt
+item.ammo.sling_bullet.name=Sling Bullet
+
+# Weapons
+weapon.name=Weapon
+weapon.damage=%d %s Damage
+weapon.damage.bludgeoning=Bludgeoning
+weapon.damage.slashing=Slashing
+weapon.damage.piercing=Piercing
+weapon.type.melee=Melee
+weapon.type.ranged=Ranged
+weapon.category.simple=Simple
+weapon.category.martial=Martial
+
+item.weapon.battleaxe.name=Battleaxe
+item.weapon.blowgun.name=Blowgun
+item.weapon.club.name=Club
+item.weapon.crossbow_hand.name=Crossbow, hand
+item.weapon.crossbow_heavy.name=Crossbow, heavy
+item.weapon.crossbow_light.name=Crossbow, light
+item.weapon.dagger.name=Dagger
+item.weapon.dart.name=Dart
+item.weapon.flail.name=Flail
+item.weapon.glaive.name=Glaive
+item.weapon.greataxe.name=Greataxe
+item.weapon.greatclub.name=Greatclub
+item.weapon.greatsword.name=Greatsword
+item.weapon.halberd.name=Halberd
+item.weapon.handaxe.name=Handaxe
+item.weapon.javelin.name=Javelin
+item.weapon.light_hammer.name=Light Hammer
+item.weapon.longbow.name=Longbow
+item.weapon.longsword.name=Longsword
+item.weapon.mace.name=Mace
+item.weapon.maul.name=Maul
+item.weapon.morningstar.name=Morningstar
+item.weapon.pike.name=Pike
+item.weapon.quarterstaff.name=Quarterstaff
+item.weapon.rapier.name=Rapier
+item.weapon.scimitar.name=Scimitar
+item.weapon.shortbow.name=Shortbow
+item.weapon.shortsword.name=Shortsword
+item.weapon.sickle.name=Sickle
+item.weapon.sling.name=Sling
+item.weapon.spear.name=Spear
+item.weapon.trident.name=Trident
+item.weapon.war_pick.name=War Pick
+item.weapon.warhammer.name=Warhammer
+item.weapon.whip.name=Whip
+
+# Armour
+armour.name=Armour
+armour.ac=%s AC
+armour.type.light=Light
+armour.type.medium=Medium
+armour.type.heavy=Heavy
+
+item.armour.breastplate.name=Breastplate
+item.armour.chain_mail.name=Chain Mail
+item.armour.chain_shirt.name=Chain Shirt
+item.armour.half_plate.name=Half Plate
+item.armour.hide.name=Hide
+item.armour.leather.name=Leather
+item.armour.padded.name=Padded
+item.armour.plate.name=Plate
+item.armour.ring_mail.name=Ring Mail
+item.armour.scale_mail.name=Scale Mail
+item.armour.splint.name=Splint
+item.armour.studded_leather.name=Studded Leather
