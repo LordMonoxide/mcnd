@@ -14,11 +14,10 @@ public class DndClasses extends Loader<DndClass> {
   @Override
   protected DndClass builder(final ObjectBuilder builder, final Map<String, Object> root) {
     final String id = builder.string(root.get("id"), "Invalid ID");
-    final String name = builder.string(root.get("name"), "Invalid name");
     final Dice hitDie = builder.dice(root.get("hitDie"), "Invalid hitDie");
     final Dice hitPointsFirstLevel = builder.dice(root.get("hitPointsFirstLevel"), "Invalid hitPointsFirstLevel");
     final Dice hitPointDice = builder.dice(root.get("hitPointDice"), "Invalid hitPointDice");
 
-    return new DndClass(id, name, hitDie, hitPointsFirstLevel, hitPointDice);
+    return new DndClass(id, hitDie, hitPointsFirstLevel, hitPointDice);
   }
 }

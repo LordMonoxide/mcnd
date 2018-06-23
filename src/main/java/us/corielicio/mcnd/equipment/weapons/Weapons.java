@@ -15,7 +15,6 @@ public class Weapons extends Loader<Weapon> {
   @Override
   protected Weapon builder(final ObjectBuilder builder, final Map<String, Object> root) {
     final String id = builder.string(root.get("id"), "Invalid ID");
-    final String name = builder.string(root.get("name"), "Invalid name");
     final WeaponType type = builder.enumeration(root.get("type"), WeaponType.class, "Invalid type");
     final WeaponCategory category = builder.enumeration(root.get("category"), WeaponCategory.class, "Invalid category");
     final Dice damage = builder.dice(root.get("damage"), "Invalid damage");
@@ -35,6 +34,6 @@ public class Weapons extends Loader<Weapon> {
       }
     }
 
-    return new Weapon(id, name, type, category, damage, damageType, cost, weight, properties);
+    return new Weapon(id, type, category, damage, damageType, cost, weight, properties);
   }
 }

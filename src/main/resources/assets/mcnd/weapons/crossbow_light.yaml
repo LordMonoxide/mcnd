@@ -1,5 +1,4 @@
 id: crossbow_light
-name: Crossbow, light
 type: ranged
 category: simple
 damage: 1d8

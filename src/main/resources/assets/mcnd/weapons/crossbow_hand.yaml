@@ -1,5 +1,4 @@
 id: crossbow_hand
-name: Crossbow, hand
 type: ranged
 category: martial
 damage: 1d6

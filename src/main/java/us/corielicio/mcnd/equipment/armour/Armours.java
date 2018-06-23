@@ -14,7 +14,6 @@ public class Armours extends Loader<Armour> {
   @Override
   protected Armour builder(final ObjectBuilder builder, final Map<String, Object> root) {
     final String id = builder.string(root.get("id"), "Invalid ID");
-    final String name = builder.string(root.get("name"), "Invalid name");
     final ArmourType type = builder.enumeration(root.get("type"), ArmourType.class, "Invalid type");
     final int cost = builder.integer(root.get("cost"), "Invalid cost");
     final Dice ac = builder.dice(root.get("ac"), "Invalid ac");
@@ -22,6 +21,6 @@ public class Armours extends Loader<Armour> {
     final int strengthRequired = builder.integer(root.get("strengthRequired"), "Invalid strengthRequired");
     final boolean stealthDisadvantage = builder.bool(root.get("stealthDisadvantage"), "Invalid stealthDisadvantage");
 
-    return new Armour(id, name, type, cost, ac, weight, strengthRequired, stealthDisadvantage);
+    return new Armour(id, type, cost, ac, weight, strengthRequired, stealthDisadvantage);
   }
 }

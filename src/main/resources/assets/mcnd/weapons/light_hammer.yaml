@@ -1,5 +1,4 @@
 id: light_hammer
-name: Light Hammer
 type: melee
 category: simple
 damage: 1d4
