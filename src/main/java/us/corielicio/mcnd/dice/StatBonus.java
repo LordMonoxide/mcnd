@@ -1,7 +1,7 @@
 package us.corielicio.mcnd.dice;
 
-import us.corielicio.mcnd.stats.CharacterStats;
-import us.corielicio.mcnd.stats.Stats;
+import us.corielicio.mcnd.characters.CharacterSheet;
+import us.corielicio.mcnd.characters.Stats;
 
 public class StatBonus extends Die {
   private final Stats stat;
@@ -17,7 +17,7 @@ public class StatBonus extends Die {
   }
 
   @Override
-  public int roll(final CharacterStats character) {
+  public int roll(final CharacterSheet character) {
     return this.clamp(character.stat(this.stat).bonus());
   }
 

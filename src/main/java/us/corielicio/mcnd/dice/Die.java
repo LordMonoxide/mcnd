@@ -1,6 +1,6 @@
 package us.corielicio.mcnd.dice;
 
-import us.corielicio.mcnd.stats.CharacterStats;
+import us.corielicio.mcnd.characters.CharacterSheet;
 
 import java.util.Random;
 
@@ -27,7 +27,7 @@ public class Die {
     this.max = max;
   }
 
-  public int roll(final CharacterStats character) {
+  public int roll(final CharacterSheet character) {
     return this.clamp(rand.nextInt(this.value) + 1);
   }
 

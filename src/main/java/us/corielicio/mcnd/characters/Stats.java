@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 public enum Stats {
   STR, DEX, CON, INT, WIS, CHA

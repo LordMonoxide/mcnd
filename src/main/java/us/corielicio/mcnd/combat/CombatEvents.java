@@ -13,12 +13,14 @@ import us.corielicio.mcnd.equipment.weapons.Weapon;
 import us.corielicio.mcnd.equipment.weapons.WeaponProperty;
 import us.corielicio.mcnd.equipment.weapons.WeaponType;
 import us.corielicio.mcnd.items.DynamicItem;
-import us.corielicio.mcnd.stats.CapabilityCharacterStats;
-import us.corielicio.mcnd.stats.CharacterStats;
-import us.corielicio.mcnd.stats.Stats;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
+import us.corielicio.mcnd.characters.CharacterSheet;
+import us.corielicio.mcnd.characters.Stats;
 
 @Mod.EventBusSubscriber(modid = Mcnd.MODID)
 public class CombatEvents {
+  private CombatEvents() { }
+
   @SubscribeEvent
   public static void onAttackEntity(final AttackEntityEvent event) {
     event.setCanceled(true);
@@ -35,11 +37,11 @@ public class CombatEvents {
     final int damage;
     final DamageType damageType;
 
-    final CharacterStats character = player.getCapability(CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet character = player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
 
     //TODO: hit check
     if(weapon != null && weapon.type == WeaponType.MELEE) {
-      final CharacterStats.Stat stat =
+      final CharacterSheet.Stat stat =
           weapon.hasProperty(WeaponProperty.VERSATILE) &&
           character.stat(Stats.DEX).bonus() > character.stat(Stats.STR).bonus() ?
               character.stat(Stats.DEX) :

@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,11 +9,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import us.corielicio.mcnd.Mcnd;
 
 @Mod.EventBusSubscriber(modid = Mcnd.MODID)
-public class StatEvents {
+public class CharacterSheetEvents {
+  private CharacterSheetEvents() { }
+
   @SubscribeEvent
-  public static void attachStats(final AttachCapabilitiesEvent<Entity> event) {
+  public static void attachOnSpawn(final AttachCapabilitiesEvent<Entity> event) {
     if(event.getObject() instanceof EntityPlayer) {
-      event.addCapability(CapabilityCharacterStats.ID, new CharacterStatsProvider());
+      event.addCapability(CapabilityCharacterSheet.ID, new CharacterSheetProvider());
     }
   }
 
@@ -21,8 +23,8 @@ public class StatEvents {
     if(event.isWasDeath()) {
       System.out.println("Clone on death");
 
-      final CharacterStats newStats = event.getEntityPlayer().getCapability(CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY, null);
-      final CharacterStats oldStats = event.getOriginal().getCapability(CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY, null);
+      final CharacterSheet newStats = event.getEntityPlayer().getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
+      final CharacterSheet oldStats = event.getOriginal().getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
 
       //TODO: update oldStats
     }

@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,16 +9,16 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import us.corielicio.mcnd.Mcnd;
 
-public class CapabilityCharacterStats {
+public class CapabilityCharacterSheet {
   public static final ResourceLocation ID = Mcnd.resource("stats");
 
-  @CapabilityInject(CharacterStats.class)
-  public static Capability<CharacterStats> CHARACTER_STATS_CAPABILITY;
+  @CapabilityInject(CharacterSheet.class)
+  public static Capability<CharacterSheet> CHARACTER_STATS_CAPABILITY;
 
   public static void register() {
-    CapabilityManager.INSTANCE.register(CharacterStats.class, new Capability.IStorage<CharacterStats>() {
+    CapabilityManager.INSTANCE.register(CharacterSheet.class, new Capability.IStorage<CharacterSheet>() {
       @Override
-      public NBTBase writeNBT(final Capability<CharacterStats> capability, final CharacterStats instance, final EnumFacing side) {
+      public NBTBase writeNBT(final Capability<CharacterSheet> capability, final CharacterSheet instance, final EnumFacing side) {
         final NBTTagCompound stats = new NBTTagCompound();
         for(final Stats stat : Stats.values()) {
           stats.setInteger(stat.name(), instance.stat(stat).raw());
@@ -40,7 +40,7 @@ public class CapabilityCharacterStats {
       }
 
       @Override
-      public void readNBT(final Capability<CharacterStats> capability, final CharacterStats instance, final EnumFacing side, final NBTBase base) {
+      public void readNBT(final Capability<CharacterSheet> capability, final CharacterSheet instance, final EnumFacing side, final NBTBase base) {
         if(!(base instanceof NBTTagCompound)) {
           return;
         }
@@ -59,6 +59,6 @@ public class CapabilityCharacterStats {
         instance.setLevel(((NBTTagCompound)base).getInteger("level"));
         instance.setExp(((NBTTagCompound)base).getInteger("exp"));
       }
-    }, CharacterStats::new);
+    }, CharacterSheet::new);
   }
 }

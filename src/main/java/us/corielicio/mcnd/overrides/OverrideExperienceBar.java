@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import us.corielicio.mcnd.Mcnd;
-import us.corielicio.mcnd.stats.CapabilityCharacterStats;
-import us.corielicio.mcnd.stats.CharacterStats;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
+import us.corielicio.mcnd.characters.CharacterSheet;
 
 import static net.minecraft.client.gui.Gui.ICONS;
 
@@ -31,7 +31,7 @@ public class OverrideExperienceBar {
     final GuiIngame gui = mc.ingameGUI;
     final FontRenderer font = gui.getFontRenderer();
 
-    final CharacterStats stats = mc.player.getCapability(CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet stats = mc.player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
 
     mc.getTextureManager().bindTexture(ICONS);
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

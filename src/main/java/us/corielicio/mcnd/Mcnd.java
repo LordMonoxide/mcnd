@@ -15,7 +15,7 @@ import us.corielicio.mcnd.equipment.weapons.Weapons;
 import us.corielicio.mcnd.equipment.weapons.ammunition.Ammunitions;
 import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.packets.McndNet;
-import us.corielicio.mcnd.stats.CapabilityCharacterStats;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
 import us.corielicio.mcnd.utils.loader.GameData;
 import us.corielicio.mcnd.utils.loader.Loader;
 
@@ -48,7 +48,7 @@ public class Mcnd {
   public void preInit(final FMLPreInitializationEvent event) throws IOException {
     logger = event.getModLog();
 
-    CapabilityCharacterStats.register();
+    CapabilityCharacterSheet.register();
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
 

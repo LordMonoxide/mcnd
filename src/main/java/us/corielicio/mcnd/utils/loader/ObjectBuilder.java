@@ -4,7 +4,7 @@ import us.corielicio.mcnd.dice.ConstantBonus;
 import us.corielicio.mcnd.dice.Dice;
 import us.corielicio.mcnd.dice.Die;
 import us.corielicio.mcnd.dice.StatBonus;
-import us.corielicio.mcnd.stats.Stats;
+import us.corielicio.mcnd.characters.Stats;
 
 import javax.annotation.Nullable;
 import java.util.*;

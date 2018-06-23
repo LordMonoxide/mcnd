@@ -1,16 +1,16 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-public class CharacterStats {
+public class CharacterSheet {
   private int level = 1;
   private int exp;
 
   private final Map<Stats, Stat> stats = new EnumMap<>(Stats.class);
   private final Map<Skills, Skill> skills = new EnumMap<>(Skills.class);
 
-  public CharacterStats() {
+  public CharacterSheet() {
     for(final Stats stat : Stats.values()) {
       this.stats.put(stat, new Stat());
     }
@@ -94,7 +94,7 @@ public class CharacterStats {
     }
 
     public int save() {
-      return this.bonus() + CharacterStats.this.proficiency() * this.saveProficiency;
+      return this.bonus() + CharacterSheet.this.proficiency() * this.saveProficiency;
     }
 
     public int saveProficiency() {
@@ -118,7 +118,7 @@ public class CharacterStats {
     }
 
     public int total() {
-      return this.stat.bonus() + CharacterStats.this.proficiency() * this.proficiency;
+      return this.stat.bonus() + CharacterSheet.this.proficiency() * this.proficiency;
     }
 
     public int proficiency() {

@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import us.corielicio.mcnd.Mcnd;
-import us.corielicio.mcnd.stats.CapabilityCharacterStats;
-import us.corielicio.mcnd.stats.CharacterStats;
-import us.corielicio.mcnd.stats.Stats;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
+import us.corielicio.mcnd.characters.CharacterSheet;
+import us.corielicio.mcnd.characters.Stats;
 
 @SideOnly(Side.CLIENT)
 public class GuiCharacterSheet extends GuiScreen {
@@ -46,7 +46,7 @@ public class GuiCharacterSheet extends GuiScreen {
 
     this.fontRenderer.drawString(I18n.format("stats"), 8, 8, 0x404040);
 
-    final CharacterStats stats = this.player.getCapability(CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet stats = this.player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
 
     for(final Stats stat : Stats.values()) {
       this.fontRenderer.drawString(I18n.format("stats.display", stats.stat(stat).raw(), stats.stat(stat).bonus(), stat.name()), 8, 8 + (stat.ordinal() + 1) * this.fontRenderer.FONT_HEIGHT, 0x404040);

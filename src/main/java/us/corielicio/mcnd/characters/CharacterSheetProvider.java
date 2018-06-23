@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -8,9 +8,9 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CharacterStatsProvider implements ICapabilitySerializable<NBTBase> {
-  private final Capability<CharacterStats> cap = CapabilityCharacterStats.CHARACTER_STATS_CAPABILITY;
-  private final CharacterStats instance = this.cap.getDefaultInstance();
+public class CharacterSheetProvider implements ICapabilitySerializable<NBTBase> {
+  private final Capability<CharacterSheet> cap = CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY;
+  private final CharacterSheet instance = this.cap.getDefaultInstance();
 
   @Override
   @Nullable

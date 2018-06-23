@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package us.corielicio.mcnd.stats;
+package us.corielicio.mcnd.characters;
 
 import mcp.MethodsReturnNonnullByDefault;
 

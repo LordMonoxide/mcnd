@@ -1,6 +1,6 @@
 package us.corielicio.mcnd.dice;
 
-import us.corielicio.mcnd.stats.CharacterStats;
+import us.corielicio.mcnd.characters.CharacterSheet;
 
 public class ConstantBonus extends Die {
   public ConstantBonus(final int value) {
@@ -8,7 +8,7 @@ public class ConstantBonus extends Die {
   }
 
   @Override
-  public int roll(final CharacterStats character) {
+  public int roll(final CharacterSheet character) {
     return this.value;
   }
 
