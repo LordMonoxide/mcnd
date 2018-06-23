@@ -1,25 +1,36 @@
 package us.corielicio.mcnd.combat;
 
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import us.corielicio.mcnd.Mcnd;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
+import us.corielicio.mcnd.characters.CharacterSheet;
+import us.corielicio.mcnd.characters.Stats;
 import us.corielicio.mcnd.dice.Die;
 import us.corielicio.mcnd.equipment.weapons.DamageType;
 import us.corielicio.mcnd.equipment.weapons.Weapon;
 import us.corielicio.mcnd.equipment.weapons.WeaponProperty;
 import us.corielicio.mcnd.equipment.weapons.WeaponType;
 import us.corielicio.mcnd.items.DynamicItem;
-import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
-import us.corielicio.mcnd.characters.CharacterSheet;
-import us.corielicio.mcnd.characters.Stats;
 
 @Mod.EventBusSubscriber(modid = Mcnd.MODID)
 public class CombatEvents {
   private CombatEvents() { }
+
+  @SubscribeEvent
+  public static void onEntitySpawn(final EntityJoinWorldEvent event) {
+    if(event.getEntity() instanceof EntityMob) {
+      final EntityMob mob = (EntityMob)event.getEntity();
+      mob.tasks.taskEntries.clear();
+      mob.targetTasks.taskEntries.clear();
+    }
+  }
 
   @SubscribeEvent
   public static void onAttackEntity(final AttackEntityEvent event) {
