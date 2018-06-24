@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.characters;
+package us.corielicio.mcnd.factions;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,23 +9,23 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import us.corielicio.mcnd.Mcnd;
 
 @Mod.EventBusSubscriber(modid = Mcnd.MODID)
-public class CharacterSheetEvents {
-  private CharacterSheetEvents() { }
+public class FactionsEvents {
+  private FactionsEvents() { }
 
   @SubscribeEvent
   public static void attachOnSpawn(final AttachCapabilitiesEvent<Entity> event) {
     if(event.getObject() instanceof EntityPlayer) {
-      event.addCapability(CapabilityCharacterSheet.ID, new CharacterSheetProvider());
+      event.addCapability(CapabilityFactions.ID, new FactionsProvider());
     }
   }
 
   @SubscribeEvent
   public static void playerClone(final PlayerEvent.Clone event) {
     if(event.isWasDeath()) {
-      final CharacterSheet newStats = event.getEntityPlayer().getCapability(CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY, null);
-      final CharacterSheet oldStats = event.getOriginal().getCapability(CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY, null);
+      final Factions newFactions = event.getEntityPlayer().getCapability(CapabilityFactions.FACTIONS_CAPABILITY, null);
+      final Factions oldFactions = event.getOriginal().getCapability(CapabilityFactions.FACTIONS_CAPABILITY, null);
 
-      //TODO: update oldStats
+      newFactions.add(oldFactions);
     }
   }
 }

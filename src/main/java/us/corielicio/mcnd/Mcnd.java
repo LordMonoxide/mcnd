@@ -9,13 +9,17 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
+import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
 import us.corielicio.mcnd.classes.DndClasses;
+import us.corielicio.mcnd.combat.CombatManager;
+import us.corielicio.mcnd.commands.CommandCombatClear;
 import us.corielicio.mcnd.equipment.armour.Armours;
 import us.corielicio.mcnd.equipment.weapons.Weapons;
 import us.corielicio.mcnd.equipment.weapons.ammunition.Ammunitions;
+import us.corielicio.mcnd.factions.CapabilityFactions;
+import us.corielicio.mcnd.factions.FactionManager;
 import us.corielicio.mcnd.guis.GuiHandler;
 import us.corielicio.mcnd.packets.McndNet;
-import us.corielicio.mcnd.characters.CapabilityCharacterSheet;
 import us.corielicio.mcnd.utils.loader.GameData;
 import us.corielicio.mcnd.utils.loader.Loader;
 
@@ -39,19 +43,24 @@ public class Mcnd {
 
   public static Logger logger;
 
+  public static final FactionManager FACTIONS = new FactionManager();
   public static final Ammunitions AMMUNITION = new Ammunitions();
   public static final Weapons WEAPONS = new Weapons();
   public static final Armours ARMOUR = new Armours();
   public static final DndClasses CLASSES = new DndClasses();
+
+  public static final CombatManager COMBAT = new CombatManager();
 
   @EventHandler
   public void preInit(final FMLPreInitializationEvent event) throws IOException {
     logger = event.getModLog();
 
     CapabilityCharacterSheet.register();
+    CapabilityFactions.register();
 
     NetworkRegistry.INSTANCE.registerGuiHandler(Mcnd.instance, new GuiHandler());
 
+    this.loadGameData(event, FACTIONS, "factions");
     this.loadGameData(event, AMMUNITION, "ammunition");
     this.loadGameData(event, WEAPONS, "weapons");
     this.loadGameData(event, ARMOUR, "armour");
@@ -67,6 +76,8 @@ public class Mcnd {
 
   @EventHandler
   public void serverStarting(final FMLServerStartingEvent event) {
+    event.registerServerCommand(new CommandCombatClear());
+
     proxy.serverStarting(event);
   }
 

@@ -1,10 +1,10 @@
 package us.corielicio.mcnd.combat;
 
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,17 +20,8 @@ import us.corielicio.mcnd.equipment.weapons.WeaponType;
 import us.corielicio.mcnd.items.DynamicItem;
 
 @Mod.EventBusSubscriber(modid = Mcnd.MODID)
-public class CombatEvents {
-  private CombatEvents() { }
-
-  @SubscribeEvent
-  public static void onEntitySpawn(final EntityJoinWorldEvent event) {
-    if(event.getEntity() instanceof EntityMob) {
-      final EntityMob mob = (EntityMob)event.getEntity();
-      mob.tasks.taskEntries.clear();
-      mob.targetTasks.taskEntries.clear();
-    }
-  }
+public class PlayerEvents {
+  private PlayerEvents() { }
 
   @SubscribeEvent
   public static void onAttackEntity(final AttackEntityEvent event) {
@@ -42,13 +33,21 @@ public class CombatEvents {
       return;
     }
 
+    final WorldServer world = (WorldServer)player.getEntityWorld();
+
+    if(!Mcnd.COMBAT.isCombatStarted()) {
+      world.getMinecraftServer().getPlayerList().sendMessage(new TextComponentTranslation("combat.started", player.getDisplayNameString()));
+    }
+
+    Mcnd.COMBAT.addCombattant(world, player);
+
     final ItemStack stack = player.getHeldItem(player.getActiveHand());
     final Weapon weapon = DynamicItem.getWeapon(stack);
 
     final int damage;
     final DamageType damageType;
 
-    final CharacterSheet character = player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet character = player.getCapability(CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY, null);
 
     //TODO: hit check
     if(weapon != null && weapon.type == WeaponType.MELEE) {
@@ -66,5 +65,12 @@ public class CombatEvents {
     }
 
     event.getEntityPlayer().sendStatusMessage(new TextComponentTranslation(damageType.lang + ".display", damage), false);
+  }
+
+  @SubscribeEvent
+  public static void onMove(final LivingEvent.LivingUpdateEvent event) {
+    if(Mcnd.COMBAT.isCombatStarted()) {
+      event.setCanceled(true);
+    }
   }
 }

@@ -58,7 +58,7 @@ public class DynamicItem extends Item {
 
   @Nullable
   public static Weapon getWeapon(final ItemStack stack) {
-    if(!stack.getTagCompound().hasKey("weapon")) {
+    if(stack.isEmpty() || !stack.getTagCompound().hasKey("weapon")) {
       return null;
     }
 
@@ -74,7 +74,7 @@ public class DynamicItem extends Item {
 
   @Nullable
   public static Armour getArmour(final ItemStack stack) {
-    if(!stack.getTagCompound().hasKey("armour")) {
+    if(stack.isEmpty() || !stack.getTagCompound().hasKey("armour")) {
       return null;
     }
 
@@ -90,7 +90,7 @@ public class DynamicItem extends Item {
 
   @Nullable
   public static Ammunition getAmmo(final ItemStack stack) {
-    if(!stack.getTagCompound().hasKey("ammo")) {
+    if(stack.isEmpty() || !stack.getTagCompound().hasKey("ammo")) {
       return null;
     }
 

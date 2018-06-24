@@ -46,7 +46,7 @@ public class GuiCharacterSheet extends GuiScreen {
 
     this.fontRenderer.drawString(I18n.format("stats"), 8, 8, 0x404040);
 
-    final CharacterSheet stats = this.player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet stats = this.player.getCapability(CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY, null);
 
     for(final Stats stat : Stats.values()) {
       this.fontRenderer.drawString(I18n.format("stats.display", stats.stat(stat).raw(), stats.stat(stat).bonus(), stat.name()), 8, 8 + (stat.ordinal() + 1) * this.fontRenderer.FONT_HEIGHT, 0x404040);

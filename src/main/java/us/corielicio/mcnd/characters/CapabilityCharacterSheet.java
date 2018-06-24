@@ -13,7 +13,7 @@ public class CapabilityCharacterSheet {
   public static final ResourceLocation ID = Mcnd.resource("stats");
 
   @CapabilityInject(CharacterSheet.class)
-  public static Capability<CharacterSheet> CHARACTER_STATS_CAPABILITY;
+  public static Capability<CharacterSheet> CHARACTER_SHEET_CAPABILITY;
 
   public static void register() {
     CapabilityManager.INSTANCE.register(CharacterSheet.class, new Capability.IStorage<CharacterSheet>() {

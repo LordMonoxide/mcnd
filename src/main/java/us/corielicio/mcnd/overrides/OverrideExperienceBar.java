@@ -31,7 +31,7 @@ public class OverrideExperienceBar {
     final GuiIngame gui = mc.ingameGUI;
     final FontRenderer font = gui.getFontRenderer();
 
-    final CharacterSheet stats = mc.player.getCapability(CapabilityCharacterSheet.CHARACTER_STATS_CAPABILITY, null);
+    final CharacterSheet stats = mc.player.getCapability(CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY, null);
 
     mc.getTextureManager().bindTexture(ICONS);
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

@@ -1,4 +1,4 @@
-package us.corielicio.mcnd.characters;
+package us.corielicio.mcnd.factions;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -8,9 +8,9 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CharacterSheetProvider implements ICapabilitySerializable<NBTBase> {
-  private final Capability<CharacterSheet> cap = CapabilityCharacterSheet.CHARACTER_SHEET_CAPABILITY;
-  private final CharacterSheet instance = this.cap.getDefaultInstance();
+public class FactionsProvider implements ICapabilitySerializable<NBTBase> {
+  private final Capability<Factions> cap = CapabilityFactions.FACTIONS_CAPABILITY;
+  private final Factions instance = this.cap.getDefaultInstance();
 
   @Override
   @Nullable
